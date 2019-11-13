@@ -88,6 +88,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     try {
                         Log.d("gxd", "in客户端向服务器添加了一本新书-->" + book.getName());
                         bookController.addBookIn(book);
+                        Log.d("gxd", "in客户端对象没有受到服务端对象修改的影响-->" + book.getName());
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
@@ -99,6 +100,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     try {
                         Log.d("gxd", "out客户端向服务器添加了一本新书-->" + book.getName());
                         bookController.addBookOut(book);
+                        Log.d("gxd", "out客户端对象受到服务端对象修改的影响-->" + book.getName());
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
