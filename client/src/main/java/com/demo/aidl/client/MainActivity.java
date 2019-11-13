@@ -39,7 +39,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.get_book_list_btn).setOnClickListener(this);
-        findViewById(R.id.add_book_btn).setOnClickListener(this);
+        findViewById(R.id.add_book_inout_btn).setOnClickListener(this);
+        findViewById(R.id.add_book_in_btn).setOnClickListener(this);
+        findViewById(R.id.add_book_out_btn).setOnClickListener(this);
 
         Intent intent = new Intent();
         intent.setComponent(new ComponentName("com.demo.aidl.server", "com.demo.aidl.server.AidlService"));
@@ -69,12 +71,34 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     }
                 }
                 break;
-            case R.id.add_book_btn:
+            case R.id.add_book_inout_btn:
                 if (isConnected) {
                     Book book = new Book("狼图腾");
                     try {
-                        Log.d("gxd", "客户端向服务器添加了一本新书-->" + book.getName());
+                        Log.d("gxd", "inout客户端向服务器添加了一本新书-->" + book.getName());
                         bookController.addBookInOut(book);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+            case R.id.add_book_in_btn:
+                if (isConnected) {
+                    Book book = new Book("狼图腾");
+                    try {
+                        Log.d("gxd", "in客户端向服务器添加了一本新书-->" + book.getName());
+                        bookController.addBookIn(book);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+            case R.id.add_book_out_btn:
+                if (isConnected) {
+                    Book book = new Book("狼图腾");
+                    try {
+                        Log.d("gxd", "out客户端向服务器添加了一本新书-->" + book.getName());
+                        bookController.addBookOut(book);
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
