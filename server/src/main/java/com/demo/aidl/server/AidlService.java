@@ -19,24 +19,24 @@ public class AidlService extends Service {
         @Override
         public void addBookInOut(Book book) {
             String rename = "朝花夕拾";
-            Log.d("gxd", "服务器将客户端添加的新书-->" + book.getName() + ", 改名为-->" + rename);
-            book.setName(rename);
+            Log.d("gxd", "服务器将客户端添加的新书-->" + book.name + ", 改名为-->" + rename);
+            book.name = rename;
             bookList.add(book);
         }
 
         @Override
         public void addBookIn(Book book) {
             String rename = "朝花夕拾";
-            Log.d("gxd", "服务器将客户端添加的新书-->" + book.getName() + ", 改名为-->" + rename);
-            book.setName(rename);
+            Log.d("gxd", "服务器将客户端添加的新书-->" + book.name + ", 改名为-->" + rename);
+            book.name = rename;
             bookList.add(book);
         }
 
         @Override
         public void addBookOut(Book book) {
             String rename = "朝花夕拾";
-            Log.d("gxd", "服务器将客户端添加的新书-->" + book.getName() + ", 改名为-->" + rename);
-            book.setName(rename);
+            Log.d("gxd", "服务器将客户端添加的新书-->" + book.name + ", 改名为-->" + rename);
+            book.name = rename;
             bookList.add(book);
         }
 

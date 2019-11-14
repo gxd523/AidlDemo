@@ -18,7 +18,7 @@ public class Book implements Parcelable {
             return new Book[size];
         }
     };
-    private String name;
+    public String name;
 
     public Book() {
     }
@@ -29,14 +29,6 @@ public class Book implements Parcelable {
 
     protected Book(Parcel in) {
         this.name = in.readString();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
