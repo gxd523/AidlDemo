@@ -13,22 +13,21 @@ import android.view.View;
 
 import com.demo.aidl.server.Book;
 import com.demo.aidl.server.BookController;
+import com.demo.aidl.server.OnDeleteBookListener;
 
 import java.util.List;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     private BookController bookController;
-    private boolean isConnected;
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             bookController = BookController.Stub.asInterface(service);
-            isConnected = true;
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            isConnected = false;
+            bookController = null;
         }
     };
 
@@ -67,6 +66,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 Log.d("gxd", "out客户端对象受到服务端对象修改的影响-->" + book.name);
                 break;
             }
+            case R.id.add_book_delete_btn: {
+                bookController.deleteBook("朝花夕拾", new OnDeleteBookListener.Stub() {
+                    @Override
+                    public void onDeleteBook() {
+                        Log.d("gxd", "异步删除书籍回调...");
+                    }
+                });
+                break;
+            }
         }
     }
 
@@ -79,6 +87,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         findViewById(R.id.add_book_inout_btn).setOnClickListener(this);
         findViewById(R.id.add_book_in_btn).setOnClickListener(this);
         findViewById(R.id.add_book_out_btn).setOnClickListener(this);
+        findViewById(R.id.add_book_delete_btn).setOnClickListener(this);
 
         bindService();
     }
@@ -86,14 +95,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (isConnected) {
+        if (bookController != null) {
             unbindService(serviceConnection);
         }
     }
 
     @Override
     public void onClick(View view) {
-        if (isConnected) {
+        if (bookController != null) {
             try {
                 onBtnClicked(view.getId());
             } catch (RemoteException e) {

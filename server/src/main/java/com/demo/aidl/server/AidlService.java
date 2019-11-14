@@ -3,6 +3,8 @@ package com.demo.aidl.server;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.RemoteException;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -40,6 +42,25 @@ public class AidlService extends Service {
             bookList.add(book);
         }
 
+        @Override
+        public void deleteBook(String bookName, OnDeleteBookListener onDeleteBookListener) throws RemoteException {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Book deleteBook = null;
+            for (Book book : bookList) {
+                if (TextUtils.equals(book.name, bookName)) {
+                    deleteBook = book;
+                    break;
+                }
+            }
+            if (deleteBook != null) {
+                bookList.remove(deleteBook);
+            }
+            onDeleteBookListener.onDeleteBook();
+        }
     };
 
     @Override
