@@ -1,1 +1,1 @@
-include ':server', ':client'
+include ':server', ':client', ':binder_pool_server', ':binder_pool_client_a', ':binder_pool_client_b'

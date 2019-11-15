@@ -12,56 +12,6 @@ import java.util.List;
 
 public class AidlService extends Service {
     private List<Book> bookList;
-    private final BookController.Stub stub = new BookController.Stub() {
-        @Override
-        public List<Book> getBookList() {
-            return bookList;
-        }
-
-        @Override
-        public void addBookInOut(Book book) {
-            String rename = "朝花夕拾";
-            Log.d("gxd", "服务器将客户端添加的新书-->" + book.name + ", 改名为-->" + rename);
-            book.name = rename;
-            bookList.add(book);
-        }
-
-        @Override
-        public void addBookIn(Book book) {
-            String rename = "朝花夕拾";
-            Log.d("gxd", "服务器将客户端添加的新书-->" + book.name + ", 改名为-->" + rename);
-            book.name = rename;
-            bookList.add(book);
-        }
-
-        @Override
-        public void addBookOut(Book book) {
-            String rename = "朝花夕拾";
-            Log.d("gxd", "服务器将客户端添加的新书-->" + book.name + ", 改名为-->" + rename);
-            book.name = rename;
-            bookList.add(book);
-        }
-
-        @Override
-        public void deleteBook(String bookName, OnDeleteBookListener onDeleteBookListener) throws RemoteException {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Book deleteBook = null;
-            for (Book book : bookList) {
-                if (TextUtils.equals(book.name, bookName)) {
-                    deleteBook = book;
-                    break;
-                }
-            }
-            if (deleteBook != null) {
-                bookList.remove(deleteBook);
-            }
-            onDeleteBookListener.onDeleteBook();
-        }
-    };
 
     @Override
     public void onCreate() {
@@ -78,6 +28,55 @@ public class AidlService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        return stub;
+        return new BookController.Stub() {
+            @Override
+            public List<Book> getBookList() {
+                return bookList;
+            }
+
+            @Override
+            public void addBookInOut(Book book) {
+                String rename = "朝花夕拾";
+                Log.d("gxd", "服务器将客户端添加的新书-->" + book.name + ", 改名为-->" + rename);
+                book.name = rename;
+                bookList.add(book);
+            }
+
+            @Override
+            public void addBookIn(Book book) {
+                String rename = "朝花夕拾";
+                Log.d("gxd", "服务器将客户端添加的新书-->" + book.name + ", 改名为-->" + rename);
+                book.name = rename;
+                bookList.add(book);
+            }
+
+            @Override
+            public void addBookOut(Book book) {
+                String rename = "朝花夕拾";
+                Log.d("gxd", "服务器将客户端添加的新书-->" + book.name + ", 改名为-->" + rename);
+                book.name = rename;
+                bookList.add(book);
+            }
+
+            @Override
+            public void deleteBook(String bookName, OnDeleteBookListener onDeleteBookListener) throws RemoteException {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Book deleteBook = null;
+                for (Book book : bookList) {
+                    if (TextUtils.equals(book.name, bookName)) {
+                        deleteBook = book;
+                        break;
+                    }
+                }
+                if (deleteBook != null) {
+                    bookList.remove(deleteBook);
+                }
+                onDeleteBookListener.onDeleteBook();
+            }
+        };
     }
 }
