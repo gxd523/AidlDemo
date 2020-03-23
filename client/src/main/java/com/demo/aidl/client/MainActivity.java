@@ -50,6 +50,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 Book book = new Book("狼图腾");
                 Log.d("gxd", "inout客户端向服务器添加了一本新书-->" + book.name);
                 bookController.addBookInOut(book);
+                Log.d("gxd", "inout客户端对象受到服务端对象修改的影响-->" + book.name);
                 break;
             }
             case R.id.add_book_in_btn: {
