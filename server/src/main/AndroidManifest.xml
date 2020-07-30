@@ -1,14 +1,12 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.demo.aidl.server">
 
-    <application
-        android:label="aidl-server"
-        tools:ignore="GoogleAppIndexingWarning">
+    <application android:label="aidl-server">
         <service
             android:name=".AidlService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"
+            android:process=":aidlservice" />
     </application>
 </manifest>

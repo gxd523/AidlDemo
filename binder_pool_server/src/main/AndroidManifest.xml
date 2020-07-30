@@ -1,11 +1,8 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.demo.binder_pool_server">
 
-    <application
-        android:label="binder_pool_server"
-        tools:ignore="GoogleAppIndexingWarning">
+    <application android:label="binder_pool_server">
         <service
             android:name=".BinderPoolService"
             android:enabled="true"

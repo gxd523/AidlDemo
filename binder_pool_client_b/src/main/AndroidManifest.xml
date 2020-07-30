@@ -1,13 +1,11 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.demo.binder_pool_client_b">
 
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="binder_pool_client_b"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-        tools:ignore="GoogleAppIndexingWarning">
+        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

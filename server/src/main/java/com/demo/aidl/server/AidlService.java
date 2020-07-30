@@ -11,20 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AidlService extends Service {
-    private List<Book> bookList;
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        bookList = new ArrayList<>();
-
-        Book book1 = new Book("平凡的世界");
-        Book book2 = new Book("海底两万里");
-        Book book3 = new Book("红楼梦");
-        bookList.add(book1);
-        bookList.add(book2);
-        bookList.add(book3);
-    }
+    private List<Book> bookList = new ArrayList<Book>() {{
+        add(new Book("平凡的世界"));
+        add(new Book("海底两万里"));
+        add(new Book("红楼梦"));
+    }};
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -75,7 +66,7 @@ public class AidlService extends Service {
                 if (deleteBook != null) {
                     bookList.remove(deleteBook);
                 }
-                onDeleteBookListener.onDeleteBook();
+                onDeleteBookListener.onDeleteBook(deleteBook);
             }
         };
     }
