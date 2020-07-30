@@ -44,4 +44,9 @@ public class Book implements Parcelable {
     public void readFromParcel(Parcel dest) {
         this.name = dest.readString();
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s(%s)", name, hashCode() % 1000);
+    }
 }
