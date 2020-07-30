@@ -47,17 +47,13 @@ public class AidlService extends Service {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Book deleteBook = null;
                 for (Book book : bookList) {
                     if (TextUtils.equals(book.name, bookName)) {
-                        deleteBook = book;
+                        onDeleteBookListener.onDeleteBook(book);
+                        bookList.remove(book);
                         break;
                     }
                 }
-                if (deleteBook != null) {
-                    bookList.remove(deleteBook);
-                }
-                onDeleteBookListener.onDeleteBook(deleteBook);
             }
         };
     }

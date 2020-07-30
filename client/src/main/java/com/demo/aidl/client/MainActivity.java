@@ -67,13 +67,22 @@ public class MainActivity extends Activity {
         Log.d("gxd", String.format("使用定向标签inout, 客户端书籍对象受到服务端影响...%s", book));
     }
 
-    public void deleteBook(View view) throws RemoteException {
-        bookController.deleteBook("朝花夕拾", new OnDeleteBookListener.Stub() {
+    public void deleteBook(View view) {
+        new Thread(new Runnable() {// TODO: 2020/7/30 不然会卡主线程
             @Override
-            public void onDeleteBook(Book book) {
-                Log.d("gxd", "异步删除书籍回调...");
+            public void run() {
+                try {
+                    bookController.deleteBook("朝花夕拾", new OnDeleteBookListener.Stub() {
+                        @Override
+                        public void onDeleteBook(Book book) {
+                            Log.d("gxd", "异步删除书籍回调..." + book);
+                        }
+                    });
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
-        });
+        }).start();
     }
 
     @Override
