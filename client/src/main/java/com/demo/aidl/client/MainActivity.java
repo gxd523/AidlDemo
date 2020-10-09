@@ -18,6 +18,9 @@ import com.demo.aidl.server.OnDeleteBookListener;
 import java.util.List;
 
 public class MainActivity extends Activity {
+    /**
+     * com.demo.aidl.server.BookController.Stub.Proxy
+     */
     private BookController bookController;
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
