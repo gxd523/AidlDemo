@@ -1,12 +1,17 @@
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.demo.aidl.client">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="com.permission.MY_SERVICE" />
+    <queries>
+        <package android:name="com.gxd.demo.aidl.server" />
+    </queries>
 
     <application
-        android:icon="@mipmap/ic_launcher"
-        android:label="aidl-client"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
-        <activity android:name=".MainActivity">
+        android:icon="@android:mipmap/sym_def_app_icon"
+        android:label="AidlDemoClient"
+        android:theme="@android:style/Theme.Light.NoTitleBar">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

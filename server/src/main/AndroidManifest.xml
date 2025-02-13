@@ -1,12 +1,18 @@
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.demo.aidl.server">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <application android:label="aidl-server">
+    <permission
+        android:name="com.permission.MY_SERVICE"
+        android:protectionLevel="signature" />
+
+    <application
+        android:icon="@android:mipmap/sym_def_app_icon"
+        android:label="AidlDemoServer"
+        android:theme="@android:style/Theme.Light.NoTitleBar">
+        <!--⚠️：服务端应用要开启自启动-->
         <service
-            android:name=".AidlService"
+            android:name=".MyAidlService"
             android:enabled="true"
             android:exported="true"
-            android:process=":aidlservice" />
+            android:permission="com.permission.MY_SERVICE" />
     </application>
 </manifest>
