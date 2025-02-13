@@ -22,3 +22,6 @@ dependencyResolutionManagement {
 rootProject.name = "AidlDemo"
 include(":client")
 include(":server")
+include(":binder_pool_server")
+include(":binder_pool_client_plus")
+include(":binder_pool_client_minus")

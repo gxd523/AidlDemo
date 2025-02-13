@@ -1,0 +1,18 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <permission
+        android:name="com.permission.MY_SERVICE"
+        android:protectionLevel="signature" />
+
+    <application
+        android:icon="@android:mipmap/sym_def_app_icon"
+        android:label="binder_pool_server"
+        android:theme="@android:style/Theme.Light.NoTitleBar">
+        <!--⚠️：服务端应用要开启自启动-->
+        <service
+            android:name=".BinderPoolService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="com.permission.MY_SERVICE" />
+    </application>
+</manifest>

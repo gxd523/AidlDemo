@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "com.gxd.demo.aidl.server"
+    namespace = "com.gxd.demo.aidl.client.plus"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.gxd.demo.aidl.server"
-        minSdk = 25
+        applicationId = "com.gxd.demo.aidl.client.plus"
+        minSdk = 35
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"

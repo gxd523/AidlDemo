@@ -10,14 +10,12 @@ import android.os.Process
 import android.os.RemoteException
 import android.util.Log
 import android.view.View
-import android.widget.TextView
 import com.gxd.demo.aidl.Book
 import com.gxd.demo.aidl.IMyAidlInterface
 import com.gxd.demo.aidl.OnDeleteBookListener
+import kotlin.concurrent.thread
 
 class MainActivity : Activity() {
-    private val textView by lazy { findViewById<TextView>(R.id.textView) }
-
     private var aidlInterface: IMyAidlInterface? = null
     private val serviceConnection by lazy {
         object : ServiceConnection {
@@ -88,27 +86,18 @@ class MainActivity : Activity() {
     }
 
     fun deleteBook(view: View?) {
-        Thread(object : Runnable {
-            // TODO: 2020/7/30 不然会卡主线程
-            override fun run() {
-                try {
-                    aidlInterface?.deleteBook("d", object : OnDeleteBookListener.Stub() {
-                        override fun onDeleteBook(book: Book?) {
-                            "异步删除书籍回调...${book?.string()}".log()
-                        }
-                    })
-                } catch (e: RemoteException) {
-                    e.printStackTrace()
+        thread {
+            aidlInterface?.deleteBook("d", object : OnDeleteBookListener.Stub() {
+                override fun onDeleteBook(book: Book?) {
+                    "异步删除书籍回调...${book?.string()}".log()
                 }
-            }
-        }).start()
+            })
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        if (aidlInterface != null) {
-            unbindService(serviceConnection)
-        }
+        if (aidlInterface != null) unbindService(serviceConnection)
     }
 
     private val logPrefix: String
