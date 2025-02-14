@@ -14,5 +14,11 @@
             android:enabled="true"
             android:exported="true"
             android:permission="com.permission.MY_SERVICE" />
+        <!--⚠️：服务端应用要开启自启动-->
+        <service
+            android:name=".MessengerService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="com.permission.MY_SERVICE" />
     </application>
 </manifest>

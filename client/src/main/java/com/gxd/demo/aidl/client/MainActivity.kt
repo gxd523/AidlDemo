@@ -6,9 +6,7 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
-import android.os.Process
 import android.os.RemoteException
-import android.util.Log
 import android.view.View
 import com.gxd.demo.aidl.Book
 import com.gxd.demo.aidl.IMyAidlInterface
@@ -98,13 +96,6 @@ class MainActivity : Activity() {
     override fun onDestroy() {
         super.onDestroy()
         if (aidlInterface != null) unbindService(serviceConnection)
-    }
-
-    private val logPrefix: String
-        get() = "Client...pid = ${Process.myPid()}, thread = ${Thread.currentThread().name}-${Thread.currentThread().id}"
-
-    private fun String.log() {
-        Log.d("ggg", "$logPrefix, $this")
     }
 
     private fun Book.string(): String =

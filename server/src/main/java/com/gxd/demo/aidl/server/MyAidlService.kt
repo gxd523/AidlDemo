@@ -3,8 +3,6 @@ package com.gxd.demo.aidl.server
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import android.os.Process
-import android.util.Log
 import com.gxd.demo.aidl.Book
 import com.gxd.demo.aidl.IMyAidlInterface
 import com.gxd.demo.aidl.OnDeleteBookListener
@@ -60,13 +58,6 @@ class MyAidlService : Service() {
         "服务端接收书籍对象...${book.string()}".log()
         book.price = book.price + 0.1
         bookList += book
-    }
-
-    private val logPrefix: String
-        get() = "Server...pid = ${Process.myPid()}, thread = ${Thread.currentThread().name}-${Thread.currentThread().id}"
-
-    private fun String.log() {
-        Log.d("ggg", "$logPrefix, $this")
     }
 
     private fun Book.string(): String =
