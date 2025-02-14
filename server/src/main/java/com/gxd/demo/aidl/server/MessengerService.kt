@@ -11,11 +11,12 @@ import android.os.Messenger
 class MessengerService : Service() {
     private val handlerThread by lazy { HandlerThread("messenger-thread") }
     private val handler by lazy {
-        object : Handler(handlerThread.looper) {
-            override fun handleMessage(msg: Message) {
+        Handler(handlerThread.looper, object : Handler.Callback {
+            override fun handleMessage(msg: Message): Boolean {
                 "handleMessage = ${msg.data?.getString("messenger_data")}".log()
+                return true
             }
-        }
+        })
     }
     private val messenger by lazy { Messenger(handler) }
 
